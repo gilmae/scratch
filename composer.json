@@ -1,0 +1,14 @@
+{
+    "name": "gilmae/scratch",
+    "description": "A set of utilities to bootstrap a basic web site. It's more or less Rack plus some additional stuff.",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "gilmae",
+            "email": "avocadia@fastmail.fm"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
