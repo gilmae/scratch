@@ -42,4 +42,19 @@ class Templater
       		return ob_get_clean();
   	}
 }
+
+class MissingTemplateException extends Exception
+{
+	private $pwd;
+	public function __construct($message = null, $code = 0, Exception $previous = null)
+	{
+		$pwd = getcwd();
+		parent::__construct($message, $code, $previous);
+	}
+
+	final public function getPwd()
+	{
+		return $pwd;
+	}
+}
 ?>

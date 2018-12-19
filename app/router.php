@@ -21,6 +21,11 @@ class Router
             return array(404, 'text/html', 'Not Found');
         }
 
+        if (is_array($route['proc'])) 
+        {
+            return $route['proc'];
+        }
+
         return $this->handle($route);
     }
 
