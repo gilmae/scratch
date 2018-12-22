@@ -35,9 +35,9 @@ class Router
         {
             $matches;
             $routeSpecAsRegex = $this->translate_route_key_to_regex($route_spec);
-            
             if (preg_match($routeSpecAsRegex, $path, $matches) == 1) 
             {
+ 
                 $tokens = $this->scan_route_key_for_tokens($route_spec);
                 $token_values = array_slice($matches, 1);
             
@@ -74,7 +74,8 @@ class Router
 
     private function translate_route_key_to_regex($route_spec)
     {
-        return "/^" . str_replace("/", "\/", preg_replace($this->ROUTE_SPEC_REGEX, "([^/]+)", $route_spec)) . "$/";
+        $path_escaped = str_replace('?', '\?', $route_spec);
+        return "/^" . str_replace("/", "\/", preg_replace($this->ROUTE_SPEC_REGEX, "([^/]+)", $path_escaped)) . "$/";
     }
 
     private function scan_route_key_for_tokens($route_spec)

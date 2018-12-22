@@ -9,8 +9,8 @@ class Scratch
 {
     public static function run($app)
     {
-        $path_only = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $result = $app->call($path_only);
+        $path = $_SERVER['REQUEST_URI'];
+        $result = $app->call($path);
 
         if (!is_array($result))
         {
