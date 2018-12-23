@@ -41,6 +41,7 @@ class Router
                 $tokens = $this->scan_route_key_for_tokens($route_spec);
                 $token_values = array_slice($matches, 1);
             
+                $route_args = [];
                 if (!empty($tokens))
                 {
                     $route_args = array_combine($tokens, $token_values);
