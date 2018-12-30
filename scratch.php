@@ -1,50 +1,61 @@
 <?php
 
-foreach (glob(dirname(__FILE__) . "/app/*.php") as $filename)
-{
+foreach (glob(dirname(__FILE__) . "/app/*.php") as $filename) {
     include $filename;
 }
 
-class Scratch
+function run($app)
 {
-    public static function run($app)
-    {
-        $path = $_SERVER['REQUEST_URI'];
-        $result = $app->call($path);
 
-        if (!is_array($result))
-        {
-            throw new Exception("Invalid App Results, expecting array: [Status, Headers, Body]");
-        }
+    $env = get_environment();
+    $result = $app->call($env);
 
-        if (count($result) != 3)
-        {
-            throw new Exception("Invalid App Results, expecting array: [Status, Headers, Body]");          
-        }
+    if (!is_array($result)) {
+        throw new Exception("Invalid App Results, expecting array: [Status, Headers, Body]");
+    }
 
-        $status = $result[0];
-        $headers = $result[1];
-        $body = $result[2];
+    if (count($result) != 3) {
+        throw new Exception("Invalid App Results, expecting array: [Status, Headers, Body]");
+    }
 
-        http_response_code($status);
+    $status = $result[0];
+    $headers = $result[1];
+    $body = $result[2];
 
-        if (is_array($headers))
-        {
-            foreach ($headers as $key => $value)
-            {
-                header($key . ": " . $value);
-            }
-        }
+    http_response_code($status);
 
-        if (!is_array($body)) 
-        {
-            $body = array($body);
-        }
-
-        foreach ($body as $body_item)
-        {
-            echo($body_item);
+    if (is_array($headers)) {
+        foreach ($headers as $key => $value) {
+            header($key . ": " . $value);
         }
     }
+
+    if (!is_array($body)) {
+        $body = array($body);
+    }
+
+    foreach ($body as $body_item) {
+        echo ($body_item);
+    }
+}
+
+function get_environment()
+{
+    return array_copy($_SERVER);
+}
+
+function array_copy(array $array)
+{
+    $result = array();
+    foreach ($array as $key => $val) {
+        if (is_array($val)) {
+            $result[$key] = arrayCopy($val);
+        } elseif (is_object($val)) {
+            $result[$key] = clone $val;
+        } else {
+            $result[$key] = $val;
+        }
+    }
+    return $result;
 }
 ?>

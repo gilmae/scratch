@@ -12,8 +12,9 @@ class Router
         $this->default_headers = $default_headers;
     }
 
-    function call($path)
+    function call($env)
     {
+        $path = $env['REQUEST_URI'];
         $route = $this->find_route($path);
 
         if (empty($route))
