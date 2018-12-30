@@ -1,0 +1,4 @@
+# Scratch
+
+A website framework more or less based shamelessly on Rack. This is a toy 
+put together to play at writing code.
