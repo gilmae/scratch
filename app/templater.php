@@ -1,4 +1,6 @@
 <?php
+namespace Scratch;
+
 class Templater
 {
 	private $errors = array();
@@ -29,7 +31,7 @@ class Templater
     	}
 		else
 		{
-      		throw new MissingTemplateException("Template: {$template_file} could not be found!");
+      		throw new Scratch\MissingTemplateException("Template: {$template_file} could not be found!");
 		}
       }
       
@@ -43,7 +45,7 @@ class Templater
   	}
 }
 
-class MissingTemplateException extends Exception
+class MissingTemplateException extends \Exception
 {
 	private $pwd;
 	public function __construct($message = null, $code = 0, Exception $previous = null)

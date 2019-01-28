@@ -1,5 +1,7 @@
 <?php
 
+namespace Scratch;
+
 class Router
 {
     private $app_routes;

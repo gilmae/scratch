@@ -1,4 +1,6 @@
 <?php
+    namespace Scratch;
+    
     class DB
     {
         private static $queries = [];

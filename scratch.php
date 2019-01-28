@@ -1,5 +1,7 @@
 <?php
 
+namespace Scratch;
+
 foreach (glob(dirname(__FILE__) . "/app/*.php") as $filename) {
     include $filename;
 }
@@ -41,7 +43,11 @@ function run($app)
 
 function get_environment()
 {
-    return array_copy($_SERVER);
+    $env = array_copy($_SERVER);
+    $env["POST"] = array_copy($_POST);
+    $env["GET"] = array_copy($_GET);
+    $env["FILES"] = array_copy($_FILES);
+    return $env;
 }
 
 function array_copy(array $array)
