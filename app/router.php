@@ -56,9 +56,10 @@ class Router
         return null;
     }   
 
-    private function handle($route)
+    private function handle($env, $route)
     {
-        $engine_result = $route['proc']($route['args']);
+        $env['route_args'] = route['args'];
+        $engine_result = $route['proc']($env);
                 
         $status_code = $engine_result[0];
         $content_type = $engine_result[1];
