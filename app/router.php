@@ -29,7 +29,7 @@ class Router
             return $route['proc'];
         }
 
-        return $this->handle($route);
+        return $this->handle($env, $route);
     }
 
     private function find_route($path)
@@ -58,7 +58,7 @@ class Router
 
     private function handle($env, $route)
     {
-        $env['route_args'] = route['args'];
+        $env['route_args'] = $route['args'];
         $engine_result = $route['proc']($env);
                 
         $status_code = $engine_result[0];
