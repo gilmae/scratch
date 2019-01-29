@@ -55,7 +55,7 @@ function array_copy(array $array)
     $result = array();
     foreach ($array as $key => $val) {
         if (is_array($val)) {
-            $result[$key] = arrayCopy($val);
+            $result[$key] = array_copy($val);
         } elseif (is_object($val)) {
             $result[$key] = clone $val;
         } else {
